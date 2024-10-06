@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 
-import '../../atom/atom.dart';
-
-
+import '../atom.dart';
 
 class PulsingButton extends StatefulWidget {
-  const PulsingButton({super.key, required this.onPressed, required this.icon});
-
+  const PulsingButton(
+      {super.key,
+      required this.onPressed,
+      required this.icon,
+      this.baseColor = Colors.blue});
   final VoidCallback onPressed;
-  final IconData icon;
+  final Icon icon;
+  final Color baseColor; // Single base color
+
   @override
   State<PulsingButton> createState() => _PulsingButtonState();
 }
@@ -29,6 +32,10 @@ class _PulsingButtonState extends State<PulsingButton>
 
   @override
   Widget build(BuildContext context) {
+    Color splashColor =
+        widget.baseColor.withOpacity(0.7); // Derived splash color
+    Color hoverColor = widget.baseColor.withOpacity(0.8); // Derived hover color
+
     return Stack(
       alignment: Alignment.center,
       children: <Widget>[
@@ -39,7 +46,7 @@ class _PulsingButtonState extends State<PulsingButton>
             child: CustomPaint(
               painter: CirclePainter(
                 radius: 28,
-                color: const Color(0xff27aeef),
+                color: widget.baseColor,
               ),
               //Add a sizedbox child to the CustomPaint, to give the button more hit area
               child: const SizedBox(
@@ -56,13 +63,14 @@ class _PulsingButtonState extends State<PulsingButton>
                 Tween<double>(begin: .7, end: .9).transform(_btnAnim.value);
             return MaterialButton(
               height: 28,
-              splashColor: const Color(0xff0f668f),
-              hoverColor: const Color(0xff0f668f),
-              color: const Color(0xff27aeef).withOpacity(opacity),
-              textColor: Colors.white,
+              splashColor: splashColor, // Use derived splash color
+              hoverColor: hoverColor, // Use derived hover color
+              color: widget.baseColor
+                  .withOpacity(opacity), // Use base color with opacity
+              
               shape: const CircleBorder(),
               onPressed: widget.onPressed,
-              child: Icon(widget.icon),
+              child: widget.icon,
             );
           },
         )

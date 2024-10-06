@@ -52,9 +52,14 @@ final class CacheManagerImpl implements CacheManager {
     return _singleton!;
   }
 
-  static void _isolateMain(RootIsolateToken? rootIsolateToken) async {
-    BackgroundIsolateBinaryMessenger.ensureInitialized(rootIsolateToken!);
-    final config = FlavorConfig(); //TODO
+  static void _isolateMain(
+      ({
+        RootIsolateToken? rootIsolateToken,
+        FlavorConfig? config
+      }) record) async {
+    BackgroundIsolateBinaryMessenger.ensureInitialized(
+        record.rootIsolateToken!);
+    final config = record.config ?? FlavorConfig();
     await Hive.initFlutter();
     await _openBox(config);
   }
@@ -67,10 +72,11 @@ final class CacheManagerImpl implements CacheManager {
     config ??= FlavorConfig();
     if (_singleton == null) {
       RootIsolateToken? rootIsolateToken = RootIsolateToken.instance;
-      compute(_isolateMain, rootIsolateToken);
-      await Hive.initFlutter(); //here was the error use await
+      compute(
+          _isolateMain, (rootIsolateToken: rootIsolateToken, config: config));
+      // await Hive.initFlutter(); //here was the error use await
 
-      _box = await _openBox(config);
+      // _box = await _openBox(config);
 
       _singleton = CacheManagerImpl._();
     }
