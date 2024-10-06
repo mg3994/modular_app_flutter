@@ -4,13 +4,10 @@ import '../atom.dart';
 
 class PulsingButton extends StatefulWidget {
   const PulsingButton(
-      {super.key,
-      required this.onPressed,
-      required this.icon,
-      this.baseColor = Colors.blue});
+      {super.key, required this.onPressed, required this.icon, this.baseColor});
   final VoidCallback onPressed;
   final Icon icon;
-  final Color baseColor; // Single base color
+  final Color? baseColor; // Single base color
 
   @override
   State<PulsingButton> createState() => _PulsingButtonState();
@@ -32,9 +29,9 @@ class _PulsingButtonState extends State<PulsingButton>
 
   @override
   Widget build(BuildContext context) {
-    Color splashColor =
-        widget.baseColor.withOpacity(0.7); // Derived splash color
-    Color hoverColor = widget.baseColor.withOpacity(0.8); // Derived hover color
+    final baseColor = widget.baseColor ?? Theme.of(context).primaryColor;
+    Color splashColor = baseColor.withOpacity(0.7); // Derived splash color
+    Color hoverColor = baseColor.withOpacity(0.8); // Derived hover color
 
     return Stack(
       alignment: Alignment.center,
@@ -46,7 +43,7 @@ class _PulsingButtonState extends State<PulsingButton>
             child: CustomPaint(
               painter: CirclePainter(
                 radius: 28,
-                color: widget.baseColor,
+                color: baseColor,
               ),
               //Add a sizedbox child to the CustomPaint, to give the button more hit area
               child: const SizedBox(
@@ -65,9 +62,9 @@ class _PulsingButtonState extends State<PulsingButton>
               height: 28,
               splashColor: splashColor, // Use derived splash color
               hoverColor: hoverColor, // Use derived hover color
-              color: widget.baseColor
-                  .withOpacity(opacity), // Use base color with opacity
-              
+              color:
+                  baseColor.withOpacity(opacity), // Use base color with opacity
+
               shape: const CircleBorder(),
               onPressed: widget.onPressed,
               child: widget.icon,

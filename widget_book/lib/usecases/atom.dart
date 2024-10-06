@@ -10,7 +10,7 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart';
     path: '[SLIDING Antimation]/Bouncing Right')
 Widget bouncingWrap(BuildContext context) {
   final color =
-      context.knobs.color(label: 'Color Of Icon', initialValue: Colors.white);
+      context.knobs.color(label: 'Color Of Icon', initialValue: Theme.of(context).primaryColor);
   final size = context.knobs.double
       .slider(label: 'Size Of Icon', initialValue: 20, max: 50);
   return BouncingWrap(
@@ -29,7 +29,7 @@ Widget bouncingWrap(BuildContext context) {
     path: '[LOADING]/Indicator')
 Widget activityIndicator(BuildContext context) {
   final color =
-      context.knobs.color(label: 'Color Of Icon', initialValue: Colors.white);
+      context.knobs.color(label: 'Color Of Icon', initialValue: Theme.of(context).primaryColor);
   final size = context.knobs.double
       .slider(label: 'Size Of Icon', initialValue: 20, max: 50);
   final bgcolor = context.knobs
@@ -47,11 +47,11 @@ Widget activityIndicator(BuildContext context) {
     path: '[Animating Icon Button]/Indicator')
 Widget pulshingButton(BuildContext context) {
   final color = context.knobs
-      .color(label: 'Color Of Pulse and Icon', initialValue: Colors.white);
+      .color(label: 'Color Of Pulse and Icon OutSide', initialValue: Theme.of(context).primaryColor);
   // final size = context.knobs.double
   //     .slider(label: 'Size Of Icon', initialValue: 20, max: 50);
   final iconColor =
-      context.knobs.color(label: 'Color Of Icon', initialValue: Colors.black38);
+      context.knobs.color(label: 'Color Of Icon Inside', initialValue: Colors.black38);
   return PulsingButton(
     onPressed: () {},
     icon: Icon(
