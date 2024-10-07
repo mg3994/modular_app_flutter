@@ -9,7 +9,7 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:widget_book/usecases/atom.dart' as _i2;
+import 'package:widget_book/usecases/components/atom.dart' as _i2;
 import 'package:widgetbook/widgetbook.dart' as _i1;
 
 final directories = <_i1.WidgetbookNode>[

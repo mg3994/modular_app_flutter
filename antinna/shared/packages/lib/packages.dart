@@ -24,6 +24,9 @@ export 'package:hive_flutter/hive_flutter.dart';
 // Locales Translation
 export 'package:l10n/l10n.dart';
 
+//Animations
+export 'package:flutter_animate/flutter_animate.dart';
+
 // ?# dev_dependencies:
 
 /// ? # self Made Custom Package

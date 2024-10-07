@@ -33,6 +33,8 @@ dependencies:
   # Locales Translation
   l10n:
     path: ../l10n
+  # Animation
+  flutter_animate:
 
 
 dev_dependencies:
